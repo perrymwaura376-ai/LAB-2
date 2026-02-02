@@ -1,0 +1,45 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ========================
+# RC Circuit Parameters
+# ========================
+R = 1000       # Resistance in Ohms
+C = 1e-6       # Capacitance in Farads
+V = 5          # Supply Voltage in Volts
+
+# Time array
+t = np.linspace(0, 0.01, 1000)
+
+# ========================
+# Charging Equation
+# Vc(t) = V(1 - e^(-t/RC))
+# ========================
+Vc_charge = V * (1 - np.exp(-t / (R * C)))
+
+# ========================
+# Discharging Equation
+# Vc(t) = V * e^(-t/RC)
+# ========================
+Vc_discharge = V * np.exp(-t / (R * C))
+
+# ========================
+# Plotting
+# ========================
+plt.figure(figsize=(8, 5))
+
+plt.plot(t, Vc_charge, label="Charging Curve")
+plt.plot(t, Vc_discharge, label="Discharging Curve")
+
+plt.xlabel("Time (seconds)")
+plt.ylabel("Voltage (Volts)")
+plt.title("RC Circuit Charging and Discharging")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# ========================
+# Display Time Constant
+# ========================
+tau = R * C
+print("Time Constant (τ) =", tau, "seconds")
